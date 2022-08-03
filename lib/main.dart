@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Quizzler(),
     ),
   );
@@ -33,32 +34,13 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<Icon> scoreKeeper = [
-    Icon(
-      Icons.check,
-      color: Colors.green,
-    ),
-    Icon(
-      Icons.close,
-      color: Colors.red,
-    ),
-    Icon(
-      Icons.close,
-      color: Colors.red,
-    ),
-    Icon(
-      Icons.close,
-      color: Colors.red,
-    ),
-    Icon(
-      Icons.close,
-      color: Colors.red,
-    ),
-    Icon(
-      Icons.close,
-      color: Colors.red,
-    ),
+  List<Icon> scoreKeeper = [];
+  List<String> questions = [
+    'You can lead a cow down stairs but not up stairs .',
+    'Approximately one quarter of human bones are in the feet  .',
+    'A slug\'s blood is green.',
   ];
+  int questionNumber = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -71,7 +53,8 @@ class _QuizPageState extends State<QuizPage> {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               child: Text(
-                'This is where the question text will go ',
+                // 'This is where the question text will go ',
+                questions[questionNumber],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -89,7 +72,17 @@ class _QuizPageState extends State<QuizPage> {
                 backgroundColor: Colors.green,
                 primary: Colors.white,
               ),
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  questionNumber++;
+                  scoreKeeper.add(
+                    Icon(
+                      Icons.check,
+                      color: Colors.green,
+                    ),
+                  );
+                });
+              },
               child: Text(
                 'true',
                 style: TextStyle(
@@ -107,7 +100,18 @@ class _QuizPageState extends State<QuizPage> {
                 backgroundColor: Colors.red,
                 primary: Colors.white,
               ),
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  questionNumber++;
+
+                  scoreKeeper.add(
+                    Icon(
+                      Icons.check,
+                      color: Colors.green,
+                    ),
+                  );
+                });
+              },
               child: Text(
                 'false',
                 style: TextStyle(
