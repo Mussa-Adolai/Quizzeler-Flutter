@@ -48,7 +48,6 @@ class _QuizPageState extends State<QuizPage> {
   // ];
   // List<bool> answer = [false, true, true];
 
-  int questionNumber = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -62,7 +61,7 @@ class _QuizPageState extends State<QuizPage> {
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               child: Text(
                 // 'This is where the question text will go ',
-                quizBrain.questionBank[questionNumber].questionText,
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -82,8 +81,7 @@ class _QuizPageState extends State<QuizPage> {
                 primary: Colors.white,
               ),
               onPressed: () {
-                bool correctAnswer =
-                    quizBrain.questionBank[questionNumber].questionAnswer;
+                bool correctAnswer = quizBrain.getQuestionAnswer();
                 if (correctAnswer == true) {
                   scoreKeeper.add(
                     Icon(
@@ -100,7 +98,7 @@ class _QuizPageState extends State<QuizPage> {
                   );
                 }
                 setState(() {
-                  questionNumber++;
+                  quizBrain.nextQuestion();
                 });
               },
               child: Text(
@@ -122,8 +120,7 @@ class _QuizPageState extends State<QuizPage> {
                 primary: Colors.white,
               ),
               onPressed: () {
-                bool correctAnswer =
-                    quizBrain.questionBank[questionNumber].questionAnswer;
+                bool correctAnswer = quizBrain.getQuestionAnswer();
                 if (correctAnswer == false) {
                   scoreKeeper.add(
                     Icon(
@@ -140,7 +137,7 @@ class _QuizPageState extends State<QuizPage> {
                   );
                 }
                 setState(() {
-                  questionNumber++;
+                  quizBrain.nextQuestion();
                 });
               },
               child: Text(
