@@ -5,6 +5,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:quzzler_test/Quiz_brain.dart';
 import 'Quiz_brain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 QuizBrain quizBrain = QuizBrain();
 
@@ -41,12 +42,27 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
-  // List<String> questions = [
-  //   'You can lead a cow down stairs but not up stairs .', //f
-  //   'Approximately one quarter of human bones are in the feet  .', //t
-  //   'A slug\'s blood is green.', //t
-  // ];
-  // List<bool> answer = [false, true, true];
+  checkAnswer(bool userPickedAnswer) {
+    bool correctAnswer = quizBrain.getQuestionAnswer();
+    setState(() {
+      if (correctAnswer == userPickedAnswer) {
+        scoreKeeper.add(
+          Icon(
+            Icons.check,
+            color: Colors.green,
+          ),
+        );
+      } else {
+        scoreKeeper.add(
+          Icon(
+            Icons.close,
+            color: Colors.red,
+          ),
+        );
+      }
+      quizBrain.nextQuestion();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,25 +97,7 @@ class _QuizPageState extends State<QuizPage> {
                 primary: Colors.white,
               ),
               onPressed: () {
-                bool correctAnswer = quizBrain.getQuestionAnswer();
-                if (correctAnswer == true) {
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ),
-                  );
-                } else {
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.close,
-                      color: Colors.red,
-                    ),
-                  );
-                }
-                setState(() {
-                  quizBrain.nextQuestion();
-                });
+                checkAnswer(true);
               },
               child: Text(
                 'true',
@@ -120,25 +118,7 @@ class _QuizPageState extends State<QuizPage> {
                 primary: Colors.white,
               ),
               onPressed: () {
-                bool correctAnswer = quizBrain.getQuestionAnswer();
-                if (correctAnswer == false) {
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ),
-                  );
-                } else {
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.close,
-                      color: Colors.red,
-                    ),
-                  );
-                }
-                setState(() {
-                  quizBrain.nextQuestion();
-                });
+                checkAnswer(false);
               },
               child: Text(
                 'false',
