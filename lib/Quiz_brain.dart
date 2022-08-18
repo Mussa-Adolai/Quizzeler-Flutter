@@ -15,6 +15,7 @@ class QuizBrain {
     if (_questionNumber < _questionBank.length - 1) {
       _questionNumber++;
     }
+    //_questionNumber++;
   }
 
   String getQuestionText() {
@@ -23,5 +24,25 @@ class QuizBrain {
 
   bool getQuestionAnswer() {
     return _questionBank[_questionNumber].questionAnswer;
+  }
+
+  // int getQuestionNo() {
+  //   return _questionNumber;
+  // }
+  //
+  // int getQuestionBankNo() {
+  //   return _questionBank.length - 1;
+  // }
+
+  resetQuestionNo() {
+    _questionNumber = 0;
+  }
+
+  bool isFinished() {
+    if (_questionNumber >= _questionBank.length - 1) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

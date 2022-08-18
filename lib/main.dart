@@ -60,8 +60,20 @@ class _QuizPageState extends State<QuizPage> {
           ),
         );
       }
-      quizBrain.nextQuestion();
+
+      checkQuestionNumber();
     });
+  }
+
+  checkQuestionNumber() {
+    if (quizBrain.isFinished() == true) {
+      Alert(context: context, title: 'Finish', desc: 'You have finish the exam')
+          .show();
+      quizBrain.resetQuestionNo();
+      scoreKeeper = [];
+    } else {
+      quizBrain.nextQuestion();
+    }
   }
 
   @override
@@ -98,6 +110,9 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 checkAnswer(true);
+                print('info');
+                // print(quizBrain.getQuestionNo());
+                // print(quizBrain.getQuestionBankNo());
               },
               child: Text(
                 'true',
