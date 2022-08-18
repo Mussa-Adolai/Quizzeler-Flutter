@@ -42,10 +42,12 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
+  int rightAnswers = 0;
   checkAnswer(bool userPickedAnswer) {
     bool correctAnswer = quizBrain.getQuestionAnswer();
     setState(() {
       if (correctAnswer == userPickedAnswer) {
+        rightAnswers++;
         scoreKeeper.add(
           Icon(
             Icons.check,
@@ -67,10 +69,26 @@ class _QuizPageState extends State<QuizPage> {
 
   checkQuestionNumber() {
     if (quizBrain.isFinished() == true) {
-      Alert(context: context, title: 'Finish', desc: 'You have finish the exam')
-          .show();
+      Alert(
+        context: context,
+        type: AlertType.info,
+        title: "Finish",
+        desc: "You have finish the exam , right answers is $rightAnswers of 3.",
+        buttons: [
+          DialogButton(
+            onPressed: () => Navigator.pop(context),
+            width: 120,
+            child: Text(
+              "COOL",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          )
+        ],
+      ).show();
+
       quizBrain.resetQuestionNo();
       scoreKeeper = [];
+      rightAnswers = 0;
     } else {
       quizBrain.nextQuestion();
     }
@@ -151,3 +169,19 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 }
+
+// Alert(
+// context: context,
+// title: 'Finish',
+// desc:
+// ' ')
+// buttons: [
+// DialogButton(
+// onPressed: () => Navigator.pop(context),
+// width: 120,
+// child: Text(
+// "COOL",
+// style: TextStyle(color: Colors.white, fontSize: 20),
+// ),
+// )
+// ],
