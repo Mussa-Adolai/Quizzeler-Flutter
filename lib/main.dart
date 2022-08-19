@@ -44,7 +44,9 @@ class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
   int rightAnswers = 0;
   checkAnswer(bool userPickedAnswer) {
-    bool correctAnswer = quizBrain.getQuestionAnswer();
+    // القيمة المنطقية للزر true or false
+    bool correctAnswer =
+        quizBrain.getQuestionAnswer(); //means true and compatible
     setState(() {
       if (correctAnswer == userPickedAnswer) {
         rightAnswers++;
@@ -128,9 +130,6 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 checkAnswer(true);
-                print('info');
-                // print(quizBrain.getQuestionNo());
-                // print(quizBrain.getQuestionBankNo());
               },
               child: Text(
                 'true',
@@ -169,19 +168,3 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 }
-
-// Alert(
-// context: context,
-// title: 'Finish',
-// desc:
-// ' ')
-// buttons: [
-// DialogButton(
-// onPressed: () => Navigator.pop(context),
-// width: 120,
-// child: Text(
-// "COOL",
-// style: TextStyle(color: Colors.white, fontSize: 20),
-// ),
-// )
-// ],

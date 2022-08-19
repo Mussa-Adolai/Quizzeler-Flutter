@@ -26,14 +26,6 @@ class QuizBrain {
     return _questionBank[_questionNumber].questionAnswer;
   }
 
-  // int getQuestionNo() {
-  //   return _questionNumber;
-  // }
-  //
-  // int getQuestionBankNo() {
-  //   return _questionBank.length - 1;
-  // }
-
   resetQuestionNo() {
     _questionNumber = 0;
   }
